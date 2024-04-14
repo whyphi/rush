@@ -1,17 +1,37 @@
+# Rush
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/477fd68d-495f-4ffb-91cb-6396a0dcf0f5/deploy-status)](https://app.netlify.com/sites/whyphi-rush/deploys)
+
+Rush is PCT's check-in application system to be used during rush.
+
+## Prerequisites
+
+Before you start working with this project, make sure you have the following prerequisites in place:
+
+Node.js: Ensure that you have Node.js installed. If not, you can download it from here. Verify your Node.js version by running the following command:
+
+```bash
+node -v
+```
+
+Your Node.js version should be at least v18.x.x. If not, consider updating Node.js using the following command:
+
+```bash
+npm install -g n
+```
+
+## Project Overview
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+To start the development server, run the following command:
+
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -29,8 +49,5 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Deployment
+This project is deployed using [Netlify](https://netlify.com/) and utilizes [Tailwind CSS](https://tailwindcss.com/) and [shadcn/ui](https://ui.shadcn.com/) components to create an attractive and responsive user interface.
