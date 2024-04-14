@@ -16,16 +16,16 @@ const authOptions: AuthOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      if (profile) {
-        return true;
+      if (profile && profile.email) {
+        return profile.email.endsWith("@bu.edu")
       }
-      return true
+      return false;
     },
 
   },
-  pages: {
-    error: "/authError"
-  },
+  // pages: {
+  //   error: "/authError"
+  // },
   secret: process.env.NEXTAUTH_SECRET
 };
 

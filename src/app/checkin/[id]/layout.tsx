@@ -1,23 +1,26 @@
 // import '../../globals.css'
+import UserSessionProvider from '@/app/providers'
 import type { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-    title: 'Whyphi - Create',
-    description: "Whyphi's Admin",
+  title: 'Whyphi - Rush',
+  description: "PCT Zeta Chapter - Rush",
 }
 
 export default function RootLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode
+  children: React.ReactNode
 }) {
-    return (
+  return (
+    <UserSessionProvider>
 
-        <div className="flex flex-col mx-auto justify-center max-w-screen-lg">
-            {children}
-        </div>
+      <div className="flex flex-col mx-auto justify-center max-w-screen-lg">
+        {children}
+      </div>
+    </UserSessionProvider>
 
 
-    )
+  )
 }

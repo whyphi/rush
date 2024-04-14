@@ -2,7 +2,7 @@
 import { useSession, signIn } from "next-auth/react"
 import Loader from '@/components/Loader';
 
-export default function AdminSessionProvider({
+export default function UserSessionProvider({
   children
 }: {
   children: React.ReactNode,
