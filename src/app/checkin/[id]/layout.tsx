@@ -15,7 +15,6 @@ export default function RootLayout({
 }) {
   return (
     <UserSessionProvider>
-
       <div className="flex flex-col mx-auto justify-center max-w-screen-lg">
         {children}
       </div>
