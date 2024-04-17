@@ -68,7 +68,7 @@ export default function Checkin({ params }: { params: { id: string } }) {
         return res.json();
       })
       .then((data) => {
-        router.push("https://bupct.com/");
+        router.push("/checkin/success");
       })
       .catch((err) => {
         setError(err);
