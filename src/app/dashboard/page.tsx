@@ -6,7 +6,7 @@ import { Event } from "@/types/Events"
 import { useRouter } from 'next/navigation'
 import Loader from "@/components/Loader"
 
-export default function Home({ params }: { params: { id: string } }) {
+export default function Dashboard({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { data: session } = useSession();
   const [event, setEvent] = useState<Event | null>(null);
