@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { Dropdown, Avatar } from "flowbite-react";
-import { HiOutlineQrcode, HiUsers } from "react-icons/hi";
 
 
 
@@ -44,31 +43,25 @@ export default function NavSidebar() {
               </button>
               <a href="/admin" className="flex ml-2 md:mr-24">
                 <img src="/pct-logo.png" className="h-8 mr-3" alt="PCT Logo" />
-                {/* <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Whyphi</span> */}
               </a>
             </div>
             <div className="flex items-center">
               {session ? (
                 <Dropdown
+                  // Not sure why Avatar is not rounding correctly
+                  // label={<Avatar alt="User settings" img={session && session.user?.image as string} rounded />}
+                  label={<img className="w-10 h-10 rounded-full" src={session && session.user?.image as string} alt="Rounded avatar" />}
                   arrowIcon={false}
                   inline
-                  label={<Avatar alt="User settings" img={session && session.user?.image as string} rounded />}
                 >
                   <Dropdown.Header>
-                    <span className="block text-sm">
-                      {session?.user?.name}
-                    </span>
-                    <span className="block truncate text-sm font-medium">
-                      {session?.user?.email}
-                    </span>
+                    <span className="block text-sm">{session?.user?.name}</span>
+                    <span className="block truncate text-sm font-medium">{session?.user?.email}</span>
                   </Dropdown.Header>
                   <Dropdown.Divider />
-                  <button
-                    className="block text-sm w-full"
-                    onClick={() => signOut({ callbackUrl: "/" })}
-                  >
-                    Sign Out
-                  </button>
+                  <Dropdown.Item onClick={() => signOut({ callbackUrl: "/" })}>
+                    Sign out
+                  </Dropdown.Item>
                 </Dropdown>
               ) : ("")}
 
