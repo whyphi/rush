@@ -124,9 +124,9 @@ export default function Checkin({ params }: { params: { id: string } }) {
   return (
     <div className="relative min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 lg:px-32">
       <AlertComponent />
-      <div className="absolute top-0 right-0 mt-6 mr-2 sm:mr-6 md:mr-12">
+      {/* <div className="absolute top-0 right-0 mt-6 mr-2 sm:mr-6 md:mr-12">
         <Button variant="link" type="button" onClick={() => signOut(({ callbackUrl: "https://bupct.com/" }))}>Logout</Button>
-      </div>
+      </div> */}
       <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Hi, {session?.user?.name}!</h1>
       <h3 className="text-md font-light text-gray-600 dark:text-white mb-6">Welcome to Phi Chi Theta, Zeta Chapter's Rush! We're excited to have you here.</h3>
       <div className="flex flex-col">
