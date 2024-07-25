@@ -41,7 +41,7 @@ export default function NavSidebar() {
                   ></path>
                 </svg>
               </button>
-              <a href="/admin" className="flex ml-2 md:mr-24">
+              <a href="/dashboard" className="flex ml-2 md:mr-24">
                 <img src="/pct-logo.png" className="h-8 mr-3" alt="PCT Logo" />
               </a>
             </div>
@@ -69,7 +69,7 @@ export default function NavSidebar() {
           </div>
         </div>
       </nav>
-
+{/* 
       <aside
         id="logo-sidebar"
         className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -102,7 +102,7 @@ export default function NavSidebar() {
             </li>
           </ul>
         </div>
-      </aside>
+      </aside> */}
     </>
   );
 }

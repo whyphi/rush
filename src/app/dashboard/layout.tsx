@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <UserSessionProvider>
       <NavSidebar />
-      <div className="flex flex-col mx-auto justify-center max-w-screen-lg">
+      <div className="flex flex-col mx-auto justify-center">
         {children}
       </div>
     </UserSessionProvider>
