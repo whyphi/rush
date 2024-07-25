@@ -40,16 +40,14 @@ export default function Dashboard({ params }: { params: { id: string } }) {
     return <Loader />
   }
   return (
-    <main className="container mx-auto p-20">
-      {/* <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"> */}
+    <div className="mt-20 lg:justify-center lg:items-center">
+      <div className="px-4 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
         {rushCategory?.events.map((event, index) => (
-          <div key={index} className="col-span-1">
+          <div key={index} className="max-w-lg">
             <EventCard event={event}/>
           </div>
         ))}
-      {/* </div> */}
-    </main>
+      </div>
+    </div>
   );
-}
-
-
+};
