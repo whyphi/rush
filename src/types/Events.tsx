@@ -21,6 +21,6 @@ export interface Event {
   attendeesId: string,
 }
 
-interface DashboardEvent extends Event {
+export interface DashboardEvent extends Event {
   checkedIn: boolean,
 }

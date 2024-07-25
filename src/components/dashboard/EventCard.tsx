@@ -1,31 +1,35 @@
-import { Event } from "@/types/Events";
-import { Card } from "flowbite-react";
-import Image from "next/image";
+import { DashboardEvent } from "@/types/Events";
+import { Badge, Card } from "flowbite-react";
+import { useRouter } from 'next/navigation'
 import Timestamp from "react-timestamp";
 
 interface EventCardProps {
-  event: Event
+  event: DashboardEvent
 }
 
 export default function EventCard({
   event
 }: EventCardProps) {
+  const router = useRouter();
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href={`/checkin/${event._id}`}>
-          <img className="rounded-t-lg" src={event.eventCoverImage} alt={event.eventCoverImageName} />
-          <div className="flex flex-col gap-2 m-4">
-            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {event.name}
-            </h5>
-            <h3 className="text-base font-bold tracking-tight text-gray-900 dark:text-white">
-              <Timestamp date={new Date(event.date)} />
-            </h3>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              Location: {event.location}
-            </p>
-          </div>
-        </a>
-    </div>
+    <Card 
+      className="p-0 gap-0 cursor-pointer"
+      imgAlt={event.eventCoverImageName}
+      imgSrc={event.eventCoverImage}
+      onClick={() => router.push(`/checkin/${event._id}`)}
+    >
+        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          {event.name}
+        </h5>
+        <h3 className="text-base font-bold tracking-tight text-gray-900 dark:text-white">
+          <Timestamp date={new Date(event.date)} />
+        </h3>
+        <p className="font-normal text-gray-700 dark:text-gray-400">
+          Location: {event.location}
+        </p>
+        <p className="flex items-center gap-2 font-normal text-gray-700 dark:text-gray-400">
+          Status: <Badge color="success">Checked-in</Badge>
+        </p>
+    </Card>
   )
 };
