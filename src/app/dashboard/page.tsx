@@ -2,29 +2,53 @@
 
 import { useState, useEffect } from "react"
 import { useSession, signOut } from "next-auth/react";
-import { Event } from "@/types/Events"
+import { Event, RushCategory } from "@/types/Events"
 import { useRouter } from 'next/navigation'
 import Loader from "@/components/Loader"
+import EventCard from "@/components/dashboard/EventCard";
 
 export default function Dashboard({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { data: session } = useSession();
-  const [event, setEvent] = useState<Event | null>(null);
-  const [code, setCode] = useState<string>("");
+  const [rushCategory, setRushCategory] = useState<RushCategory | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
-  console.log(session);
+  console.log(rushCategory?.events);
   
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/default`, {
+    })
+      .then((res) => {
+        if (!res.ok) {
+          // router.push("/checkin/error");
+          throw new Error("Failed to fetch event");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setRushCategory(data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError(err);
+      });
+  }, []);
 
   if (isLoading) {
     return <Loader />
   }
   return (
-    <div className="relative min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 lg:px-32">
-      hello world
-    </div>
+    <main className="container mx-auto p-20">
+      {/* <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"> */}
+        {rushCategory?.events.map((event, index) => (
+          <div key={index} className="col-span-1">
+            <EventCard event={event}/>
+          </div>
+        ))}
+      {/* </div> */}
+    </main>
   );
 }
 
