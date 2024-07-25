@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useSession, signOut } from "next-auth/react";
-import { Event, RushCategory } from "@/types/Events"
+import { useSession } from "next-auth/react";
+import {  RushCategory } from "@/types/Events"
 import { useRouter } from 'next/navigation'
 import Loader from "@/components/Loader"
 import EventCard from "@/components/dashboard/EventCard";
@@ -17,12 +17,11 @@ export default function Dashboard({ params }: { params: { id: string } }) {
     // ensure user is defined
     if (!session?.user) return;
 
-    // TODO: pass this into API
-    // const email = session.user.email
+    const email = session.user.email
     
     const fetchRushEvents = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/default`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/default/${email}`);
         if (!response.ok) {
           // router.push("/checkin/error");
           setError(new Error("Failed to fetch event"));

@@ -1,6 +1,7 @@
 import { DashboardEvent } from "@/types/Events";
 import { Badge, Card } from "flowbite-react";
 import { useRouter } from 'next/navigation'
+import { useState } from "react";
 import Timestamp from "react-timestamp";
 
 interface EventCardProps {
@@ -14,16 +15,31 @@ export default function EventCard({
 
   const eventDeadline = new Date(event.deadline);
   const isEventPassed = eventDeadline < new Date();
+  const disabled = isEventPassed || event.checkedIn
 
   const handleEventClick = () => {
-    if (!isEventPassed) {
+    if (!disabled) {
       router.push(`/checkin/${event._id}`)
     }
   }
 
+  const renderStatus = () => (
+    event.checkedIn ? (
+      <Badge color="success">Checked-in</Badge>
+    ) : (
+      <>
+        {isEventPassed ? (
+          <Badge color="failure">Did not attend</Badge>
+        ) : (
+          <Badge color="warning">Not checked-in</Badge>
+        )}
+      </>
+    )
+  )
+
   return (
     <Card
-      className={`${isEventPassed ? "bg-gray-200 cursor-not-allowed" : "cursor-pointer"}`}
+      className={`${disabled ? "bg-gray-200 cursor-not-allowed" : "cursor-pointer"}`}
       renderImage={() => (
         <div className="relative">
           <img
@@ -31,7 +47,7 @@ export default function EventCard({
             alt={event.eventCoverImageName}
             src={event.eventCoverImage}
           />
-          {isEventPassed && <div className="absolute inset-0 bg-gray-200 opacity-50 rounded-t-lg"></div>}
+          {disabled && <div className="absolute inset-0 bg-gray-200 opacity-50 rounded-t-lg"></div>}
       </div>
       )}
       onClick={handleEventClick}
@@ -47,7 +63,8 @@ export default function EventCard({
           Location: {event.location}
         </p>
         <p className="flex items-center gap-2 font-normal text-gray-700 dark:text-gray-400">
-          Status: <Badge color="success">Checked-in</Badge>
+          Status:
+          {renderStatus()}
         </p>
     </Card>
   )
