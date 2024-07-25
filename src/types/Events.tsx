@@ -3,7 +3,7 @@ export interface RushCategory {
   name: string,
   defaultRushCategory: boolean,
   dateCreated: string,
-  events: [Event],
+  events: [DashboardEvent],
 }
 
 export interface Event {
@@ -19,4 +19,8 @@ export interface Event {
   eventCoverImageName: string,
   lastModified: string,
   attendeesId: string,
+}
+
+interface DashboardEvent extends Event {
+  checkedIn: boolean,
 }

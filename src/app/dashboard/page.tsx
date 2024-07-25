@@ -8,33 +8,35 @@ import Loader from "@/components/Loader"
 import EventCard from "@/components/dashboard/EventCard";
 
 export default function Dashboard({ params }: { params: { id: string } }) {
-  const router = useRouter();
   const { data: session } = useSession();
   const [rushCategory, setRushCategory] = useState<RushCategory | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
-
-  console.log(rushCategory?.events);
-  
+  const [error, setError] = useState<unknown | null>(null);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/default`, {
-    })
-      .then((res) => {
-        if (!res.ok) {
+    // ensure user is defined
+    if (!session?.user) return;
+
+    // TODO: pass this into API
+    // const email = session.user.email
+    
+    const fetchRushEvents = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/default`);
+        if (!response.ok) {
           // router.push("/checkin/error");
-          throw new Error("Failed to fetch event");
+          setError(new Error("Failed to fetch event"));
         }
-        return res.json();
-      })
-      .then((data) => {
+        const data: RushCategory = await response.json();
         setRushCategory(data);
         setIsLoading(false);
-      })
-      .catch((err) => {
-        setError(err);
-      });
-  }, []);
+      } catch (error) {
+        setError(error);
+      }
+    }
+
+    fetchRushEvents();
+  }, [session]);
 
   if (isLoading) {
     return <Loader />
