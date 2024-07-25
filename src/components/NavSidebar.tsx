@@ -48,9 +48,7 @@ export default function NavSidebar() {
             <div className="flex items-center">
               {session ? (
                 <Dropdown
-                  // Not sure why Avatar is not rounding correctly
-                  // label={<Avatar alt="User settings" img={session && session.user?.image as string} rounded />}
-                  label={<img className="w-10 h-10 rounded-full" src={session && session.user?.image as string} alt="Rounded avatar" />}
+                  label={<Avatar alt="User settings" img={session && session.user?.image as string} rounded />}
                   arrowIcon={false}
                   inline
                 >
@@ -58,7 +56,6 @@ export default function NavSidebar() {
                     <span className="block text-sm">{session?.user?.name}</span>
                     <span className="block truncate text-sm font-medium">{session?.user?.email}</span>
                   </Dropdown.Header>
-                  <Dropdown.Divider />
                   <Dropdown.Item onClick={() => signOut({ callbackUrl: "/" })}>
                     Sign out
                   </Dropdown.Item>
