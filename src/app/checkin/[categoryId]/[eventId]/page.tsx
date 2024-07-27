@@ -54,7 +54,7 @@ export default function Checkin({
 
   const handleSubmit = () => {
     setIsButtonDisabled(true);
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/checkin/${params.eventId}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/checkin/${params.categoryId}/${params.eventId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
