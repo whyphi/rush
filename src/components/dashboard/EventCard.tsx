@@ -19,7 +19,7 @@ export default function EventCard({
 
   const handleEventClick = () => {
     if (!disabled) {
-      router.push(`/checkin/${event._id}`)
+      router.push(`/checkin/${event.categoryId}/${event._id}`)
     }
   }
 

@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Checkbox } from "@/components/ui/checkbox"
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { Event } from "@/types/Events"
 import { useRouter } from 'next/navigation'
 import Loader from "@/components/Loader"
@@ -15,8 +14,16 @@ import {
   AlertTitle,
 } from "@/components/ui/alert"
 
+interface CheckinParams {
+  params: {
+    categoryId: string;
+    eventId: string;
+  }
+}
 
-export default function Checkin({ params }: { params: { id: string } }) {
+export default function Checkin({ 
+  params,
+}: CheckinParams) {
   const router = useRouter();
   const { data: session } = useSession();
   const [event, setEvent] = useState<Event | null>(null);
@@ -27,7 +34,7 @@ export default function Checkin({ params }: { params: { id: string } }) {
 
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/${params.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/${params.eventId}`, {
     })
       .then((res) => {
         if (!res.ok) {
@@ -47,7 +54,7 @@ export default function Checkin({ params }: { params: { id: string } }) {
 
   const handleSubmit = () => {
     setIsButtonDisabled(true);
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/checkin/${params.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/checkin/${params.eventId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

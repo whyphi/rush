@@ -3,11 +3,10 @@
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react";
 import {  RushCategory } from "@/types/Events"
-import { useRouter } from 'next/navigation'
 import Loader from "@/components/Loader"
 import EventCard from "@/components/dashboard/EventCard";
 
-export default function Dashboard({ params }: { params: { id: string } }) {
+export default function Dashboard() {
   const { data: session } = useSession();
   const [rushCategory, setRushCategory] = useState<RushCategory | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
