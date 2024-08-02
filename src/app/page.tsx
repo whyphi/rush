@@ -1,22 +1,30 @@
 "use client"
 
+import Loader from "@/components/Loader";
 import { useThemeMode } from "flowbite-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Home() {
   const { mode } = useThemeMode();
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    if (mode) setIsLoading(false);
+  },[mode])
+
+  if (isLoading) return <Loader />
+  
   return (
     <section>
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
         <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
           <img
             alt="WhyPhi Cover Image"
-            src={`${mode === 'dark' ? 
+            src={mode === 'dark' ? 
               'https://images.unsplash.com/photo-1557264337-e8a93017fe92?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
               :
-              'https://images.unsplash.com/photo-1641763773957-35922086117c?q=80&w=4740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}'
-            }`}
+              'https://images.unsplash.com/photo-1641763773957-35922086117c?q=80&w=4740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            }
             className="absolute inset-0 h-full w-full object-cover"
           />
         </aside>
