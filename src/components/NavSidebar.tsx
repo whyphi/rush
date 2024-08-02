@@ -79,7 +79,7 @@ export default function NavSidebar() {
             <Sidebar.Item href="/dashboard" icon={HiChartPie}>
               Dashboard
             </Sidebar.Item>
-            <Sidebar.Item href="/#" icon={HiTable}>
+            <Sidebar.Item href="/attendance" icon={HiTable}>
               Attendance
             </Sidebar.Item>
           </Sidebar.ItemGroup>
