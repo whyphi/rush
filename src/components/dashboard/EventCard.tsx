@@ -39,7 +39,7 @@ export default function EventCard({
 
   return (
     <Card
-      className={`${disabled ? "bg-gray-200 cursor-not-allowed" : "cursor-pointer"}`}
+      className={`${disabled ? "bg-gray-200 cursor-not-allowed" : "card cursor-pointer"}`}
       renderImage={() => (
         <div className="relative">
           <img

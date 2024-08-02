@@ -1,4 +1,4 @@
-// import '../../globals.css'
+import '../globals.css'
 import UserSessionProvider from '@/app/providers/userSessionProvider'
 import NavSidebar from '@/components/NavSidebar'
 import type { Metadata } from 'next'
