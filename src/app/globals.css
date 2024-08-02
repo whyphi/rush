@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom styles */
+body {
+  /* Default background color */
+  background-color: #ffffff; /* Light mode background */
+}
+
+.dark body {
+  /* Dark mode background color */
+  /* Gray-700 */
+  /* background-color: #374151; */
+  /* Gray-800 */
+  /* background-color: #1f2937; */
+
+  /* Somwhere in between 700 and 800 */
+  background-color: #29313e;
+}
+
 /************************** glowing border effect  ***************************/
 /* source: https://www.youtube.com/watch?v=ezP4kbOvs_E&list=PLZ6KBrFKcaDtqcqHv9NUCpul8a2B3F33F&index=6 */
 .card {

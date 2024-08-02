@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
-import { Dropdown, Avatar, Sidebar } from "flowbite-react";
+import { Dropdown, Avatar, Sidebar, DarkThemeToggle, useThemeMode } from "flowbite-react";
 import { HiChartPie, HiTable } from "react-icons/hi";
 
 
@@ -9,6 +9,7 @@ import { HiChartPie, HiTable } from "react-icons/hi";
 export default function NavSidebar() {
   const { data: session } = useSession();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { mode } = useThemeMode();
 
 
   const toggleSidebar = () => {
@@ -17,7 +18,7 @@ export default function NavSidebar() {
 
   return (
     <>
-      <nav className={`fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 ${isSidebarOpen ? 'lg:pl-64' : 'lg:px-5'}`}>
+      <nav className={`fixed top-0 z-50 w-full bg-gray-50 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 ${isSidebarOpen ? 'lg:pl-64' : 'lg:px-5'}`}>
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
@@ -42,10 +43,11 @@ export default function NavSidebar() {
                 </svg>
               </button>
               <a href="/dashboard" className="flex ml-2 md:mr-24">
-                <img src="/pct-logo.png" className="h-8 mr-3" alt="PCT Logo" />
+                <img src={mode === 'dark' ? '/pct-logo-dark.png' : '/pct-logo.png'} className="h-8 mr-3" alt="PCT Logo" />
               </a>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center gap-5">
+              <DarkThemeToggle />
               {session ? (
                 <Dropdown
                   label={<Avatar alt="User settings" img={session && session.user?.image as string} rounded />}

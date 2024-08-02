@@ -1,9 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Checkbox } from "@/components/ui/checkbox"
 import { useSession, signOut } from "next-auth/react";
 import { Event } from "@/types/Events"
 import { useRouter } from 'next/navigation'
@@ -14,7 +11,7 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert"
-import { Badge } from "flowbite-react"
+import { Badge, TextInput, Button } from "flowbite-react"
 
 
 export default function Checkin({ params }: { params: { id: string } }) {
@@ -123,16 +120,24 @@ export default function Checkin({ params }: { params: { id: string } }) {
     return <Loader />
   }
   return (
-    <div className="relative min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 lg:px-32">
+    <div className="relative min-h-screen flex flex-col justify-center sm:px-12 md:px-24 lg:px-32">
       <AlertComponent />
       <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Hi, {session?.user?.name}!</h1>
       <h3 className="text-md font-light text-gray-600 dark:text-white mb-6">Welcome to Phi Chi Theta, Zeta Chapter's Rush! We're excited to have you here.</h3>
       <div className="flex flex-col">
-        <p className="flex items-center gap-1 text-md">Please enter your code to check-in to <Badge>{event?.name}</Badge>:</p>
-        <div className="flex items-center space-x-2 mt-1 mb-8">
-          <Input type="text" placeholder="Code" value={code} onChange={(e) => setCode(e.target.value)} />
+        <p className="flex items-center gap-1 text-gray-600 dark:text-white text-md">Please enter your code to check-in to <Badge>{event?.name}</Badge>:</p>
+        <div className="flex items-center space-x-2 mt-2 mb-8">
+          <TextInput className="w-full" type="text" placeholder="Code" value={code} onChange={(e) => setCode(e.target.value)} />
         </div>
-        <Button className="w-24" type="submit" onClick={handleSubmit} disabled={isButtonDisabled} >Submit</Button>
+        <Button 
+          className="w-24"
+          type="submit"
+          onClick={handleSubmit}
+          disabled={isButtonDisabled} 
+          color="purple"
+        >
+            Submit
+        </Button>
       </div>
     </div>
   );
