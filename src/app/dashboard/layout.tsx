@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-  title: 'Whyphi - Rush Home',
+  title: 'WhyPhi - Rush Home',
   description: "PCT Zeta Chapter - Rush Home Page",
 }
 
@@ -17,6 +17,7 @@ export default function RootLayout({
   return (
     <UserSessionProvider>
       <NavSidebar />
+      {/* <div className="p-8 sm:ml-64 mt-14"> */}
       <div className="flex flex-col mx-auto justify-center">
         {children}
       </div>
