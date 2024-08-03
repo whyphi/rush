@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-  title: 'WhyPhi - Rush Checkin Error',
+  title: 'WhyPhi - Success',
   description: "PCT Zeta Chapter - Rush Checkin Page",
 }
 
