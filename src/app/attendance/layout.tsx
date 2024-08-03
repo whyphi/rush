@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'WhyPhi - Rush Home',
-  description: "PCT Zeta Chapter - Rush Home Page",
+  description: "PCT Zeta Chapter - Rush Attendance",
 }
 
 export default function RootLayout({

@@ -1,13 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
-import { Dropdown, Avatar } from "flowbite-react";
+import { Dropdown, Avatar, Sidebar, DarkThemeToggle, useThemeMode } from "flowbite-react";
+import { HiChartPie, HiTable } from "react-icons/hi";
 
 
 
 export default function NavSidebar() {
   const { data: session } = useSession();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { mode } = useThemeMode();
 
 
   const toggleSidebar = () => {
@@ -16,8 +18,7 @@ export default function NavSidebar() {
 
   return (
     <>
-
-      <nav className={`fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 ${isSidebarOpen ? 'lg:pl-64' : 'lg:px-5'}`}>
+      <nav className={`fixed top-0 z-50 w-full bg-gray-50 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 ${isSidebarOpen ? 'lg:pl-64' : 'lg:px-5'}`}>
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
@@ -42,10 +43,11 @@ export default function NavSidebar() {
                 </svg>
               </button>
               <a href="/dashboard" className="flex ml-2 md:mr-24">
-                <img src="/pct-logo.png" className="h-8 mr-3" alt="PCT Logo" />
+                <img src={mode === 'dark' ? '/pct-logo-dark.png' : '/pct-logo.png'} className="h-8 mr-3" alt="PCT Logo" />
               </a>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center gap-5">
+              <DarkThemeToggle />
               {session ? (
                 <Dropdown
                   label={<Avatar alt="User settings" img={session && session.user?.image as string} rounded />}
@@ -66,40 +68,23 @@ export default function NavSidebar() {
           </div>
         </div>
       </nav>
-{/* 
-      <aside
+
+      <Sidebar 
+        className={`fixed z-40 pt-16 transition-transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} sm:translate-x-0`}
         id="logo-sidebar"
-        className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-          <ul className="space-y-2 font-medium">
-            <li>
-              <a
-                href="/dashboard"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                <svg
-                  className="w-5 h-5 text-gray-800 dark:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 18 20"
-                >
-                  <path
-                    d="M5 9V4.13a2.96 2.96 0 0 0-1.293.749L.879 7.707A2.96 2.96 0 0 0 .13 9H5Zm11.066-9H9.829a2.98 2.98 0 0 0-2.122.879L7 1.584A.987.987 0 0 0 6.766 2h4.3A3.972 3.972 0 0 1 15 6v10h1.066A1.97 1.97 0 0 0 18 14V2a1.97 1.97 0 0 0-1.934-2Z"
-                  />
-                  <path
-                    d="M11.066 4H7v5a2 2 0 0 1-2 2H0v7a1.969 1.969 0 0 0 1.933 2h9.133A1.97 1.97 0 0 0 13 18V6a1.97 1.97 0 0 0-1.934-2Z"
-                  />
-                </svg>
-                <span className="ml-3">Dashboard</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </aside> */}
+        <Sidebar.Items>
+          <Sidebar.ItemGroup>
+            <Sidebar.Item href="/dashboard" icon={HiChartPie}>
+              Dashboard
+            </Sidebar.Item>
+            <Sidebar.Item href="/attendance" icon={HiTable}>
+              Attendance
+            </Sidebar.Item>
+          </Sidebar.ItemGroup>
+        </Sidebar.Items>
+      </Sidebar>
     </>
   );
 }
