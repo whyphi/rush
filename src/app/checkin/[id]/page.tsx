@@ -26,6 +26,9 @@ export default function Checkin({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/${params.id}`, {
+      method: "POST",
+      body: JSON.stringify({}),
+      headers: { "Content-Type": "application/json" },
     })
       .then((res) => {
         if (!res.ok) {
