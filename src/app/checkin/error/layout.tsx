@@ -5,8 +5,8 @@ import type { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-  title: 'WhyPhi - Rush Checkin',
-  description: "PCT Zeta Chapter - Rush Checkin Page",
+  title: 'WhyPhi - Error',
+  description: "PCT Zeta Chapter - Rush Checkin Error",
 }
 
 export default function RootLayout({

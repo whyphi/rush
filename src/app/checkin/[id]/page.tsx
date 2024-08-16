@@ -1,9 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Checkbox } from "@/components/ui/checkbox"
 import { useSession, signOut } from "next-auth/react";
 import { Event } from "@/types/Events"
 import { useRouter } from 'next/navigation'
@@ -14,6 +11,7 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert"
+import { Badge, TextInput, Button } from "flowbite-react"
 
 
 export default function Checkin({ params }: { params: { id: string } }) {
@@ -28,6 +26,9 @@ export default function Checkin({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/${params.id}`, {
+      method: "POST",
+      body: JSON.stringify({}),
+      headers: { "Content-Type": "application/json" },
     })
       .then((res) => {
         if (!res.ok) {
@@ -122,19 +123,24 @@ export default function Checkin({ params }: { params: { id: string } }) {
     return <Loader />
   }
   return (
-    <div className="relative min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 lg:px-32">
+    <div className="relative min-h-screen flex flex-col justify-center sm:px-12 md:px-24 lg:px-32">
       <AlertComponent />
-      <div className="absolute top-0 right-0 mt-6 mr-2 sm:mr-6 md:mr-12">
-        <Button variant="link" type="button" onClick={() => signOut(({ callbackUrl: "https://bupct.com/" }))}>Logout</Button>
-      </div>
       <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Hi, {session?.user?.name}!</h1>
       <h3 className="text-md font-light text-gray-600 dark:text-white mb-6">Welcome to Phi Chi Theta, Zeta Chapter's Rush! We're excited to have you here.</h3>
       <div className="flex flex-col">
-        <p className="text-md">Please enter your code to check-in to {event?.name}:</p>
-        <div className="flex items-center space-x-2 mt-1 mb-8">
-          <Input type="text" placeholder="Code" value={code} onChange={(e) => setCode(e.target.value)} />
+        <p className="flex items-center gap-1 text-gray-600 dark:text-white text-md">Please enter your code to check-in to <Badge>{event?.name}</Badge>:</p>
+        <div className="flex items-center space-x-2 mt-2 mb-8">
+          <TextInput className="w-full" type="text" placeholder="Code" value={code} onChange={(e) => setCode(e.target.value)} />
         </div>
-        <Button className="w-24" type="submit" onClick={handleSubmit} disabled={isButtonDisabled} >Submit</Button>
+        <Button 
+          className="w-24"
+          type="submit"
+          onClick={handleSubmit}
+          disabled={isButtonDisabled} 
+          color="purple"
+        >
+            Submit
+        </Button>
       </div>
     </div>
   );

@@ -1,12 +1,12 @@
-// import '../../globals.css'
+import '../globals.css'
 import UserSessionProvider from '@/app/providers/userSessionProvider'
 import NavSidebar from '@/components/NavSidebar'
 import type { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-  title: 'WhyPhi - Rush Checkin',
-  description: "PCT Zeta Chapter - Rush Checkin Page",
+  title: 'WhyPhi - Rush Home',
+  description: "PCT Zeta Chapter - Rush Attendance",
 }
 
 export default function RootLayout({
