@@ -43,7 +43,7 @@ export default function EventCard({
       renderImage={() => (
         <div className="relative">
           <img
-            className="rounded-t-lg"
+            className="rounded-t-lg w-full"
             alt={event.eventCoverImageName}
             src={event.eventCoverImage}
           />
