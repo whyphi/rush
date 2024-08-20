@@ -3,6 +3,7 @@ import { Badge, Card } from "flowbite-react";
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
 import Timestamp from "react-timestamp";
+import ImagePlaceholder from "@/components/dashboard/ImagePlaceholder";
 
 interface EventCardProps {
   event: DashboardEvent
@@ -12,6 +13,8 @@ export default function EventCard({
   event
 }: EventCardProps) {
   const router = useRouter();
+
+  const [loading, setLoading] = useState(true);
 
   const eventDeadline = new Date(event.deadline);
   const isEventPassed = eventDeadline < new Date();
@@ -42,10 +45,13 @@ export default function EventCard({
       className={`${disabled ? "bg-gray-200 dark:bg-gray-600 cursor-not-allowed" : "card cursor-pointer"}`}
       renderImage={() => (
         <div className="relative">
+          {loading && <ImagePlaceholder />}
           <img
-            className="rounded-t-lg w-full"
-            alt={event.eventCoverImageName}
+            className={`rounded-t-lg w-full ${loading && "hidden"}`}
             src={event.eventCoverImage}
+            alt={event.eventCoverImageName}
+            onLoad={() => setLoading(false)} // Set loading to false when the image is loaded
+            onError={() => setLoading(false)} // Handle error case
           />
           {disabled && <div className="absolute inset-0 bg-gray-200 opacity-50 rounded-t-lg"></div>}
       </div>
