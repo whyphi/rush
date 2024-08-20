@@ -47,7 +47,7 @@ export default function Dashboard() {
   }
   
   return (
-    <div className="mt-20 mx-4 lg:mx-10 lg:justify-center lg:items-center">
+    <div className="mt-20 sm:mx-4 lg:mx-10 lg:justify-center lg:items-center">
       {!(rushCategory?.events && rushCategory.events.length > 0  )
       ?
       <div className="flex flex-col gap-2">
