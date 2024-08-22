@@ -3,7 +3,7 @@ export interface RushCategory {
   name: string,
   defaultRushCategory: boolean,
   dateCreated: string,
-  events: [DashboardEvent],
+  events: readonly DashboardEvent[],
 }
 
 export interface Event {
