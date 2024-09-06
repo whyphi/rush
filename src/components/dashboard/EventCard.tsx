@@ -17,8 +17,11 @@ export default function EventCard({
   const [loading, setLoading] = useState(true);
 
   const eventDeadline = new Date(event.deadline);
-  const isEventPassed = eventDeadline < new Date();
-  const disabled = isEventPassed || event.checkedIn
+  const eventDate = new Date(event.date);
+  const now = new Date();
+  const isEventPassed = eventDeadline < now;
+  const isBeforeEvent =  now < eventDate;
+  const disabled = isBeforeEvent || isEventPassed || event.checkedIn
 
   const handleEventClick = () => {
     if (!disabled) {
@@ -58,10 +61,13 @@ export default function EventCard({
       )}
       onClick={handleEventClick}
     >
-        <h5 className="flex items-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          <span className={`flex w-2 h-2 me-3 ${isEventPassed ? "bg-red-500" : "bg-green-500"} rounded-full`}></span>
-          {event.name}
-        </h5>
+        <div className="flex items-center justify-between">
+          <h5 className="flex items-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <span className={`flex w-2 h-2 me-3 ${isEventPassed ? "bg-red-500" : "bg-green-500"} rounded-full`}></span>
+            {event.name}
+          </h5>
+          {!disabled && <Badge color="success">In-progress</Badge>}
+        </div>
         <h3 className="text-base font-bold tracking-tight text-gray-900 dark:text-white">
           <Timestamp date={new Date(event.date)} />
         </h3>
