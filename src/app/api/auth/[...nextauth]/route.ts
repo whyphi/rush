@@ -52,6 +52,21 @@ const authOptions: AuthOptions = {
 
       return true;
     },
+    async session({ session }) {
+      // Fetch rushee_id from Supabase using session.user.email
+      const { data, error } = await supabase
+        .from("rushees")
+        .select("id")
+        .eq("email", session?.user?.email)
+        .single();
+
+      session.expires;
+      if (data?.id && session.user) {
+        session.user.rushee_id = data.id;
+      }
+
+      return session;
+    },
   },
   // pages: {
   //   error: "/authError"

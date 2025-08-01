@@ -21,16 +21,16 @@ export default function EventCard({
   const now = new Date();
   const isEventPassed = eventDeadline < now;
   const isBeforeEvent =  now < eventDate;
-  const disabled = isBeforeEvent || isEventPassed || event.checkedIn
+  const disabled = isBeforeEvent || isEventPassed || event.checked_in
 
   const handleEventClick = () => {
     if (!disabled) {
-      router.push(`/checkin/${event._id}`)
+      router.push(`/checkin/${event.id}`)
     }
   }
 
   const renderStatus = () => (
-    event.checkedIn ? (
+    event.checked_in ? (
       <Badge color="success">Checked-in</Badge>
     ) : (
       <>
@@ -51,8 +51,8 @@ export default function EventCard({
           {loading && <ImagePlaceholder />}
           <img
             className={`rounded-t-lg w-full ${loading && "hidden"}`}
-            src={event.eventCoverImage}
-            alt={event.eventCoverImageName}
+            src={event.event_cover_image}
+            alt={event.event_cover_image_name}
             onLoad={() => setLoading(false)} // Set loading to false when the image is loaded
             onError={() => setLoading(false)} // Handle error case
           />

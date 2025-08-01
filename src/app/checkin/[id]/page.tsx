@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useSession, signOut } from "next-auth/react";
-import { Event } from "@/types/Events"
+import { EventRush } from "@/types/Events"
 import { useRouter } from 'next/navigation'
 import Loader from "@/components/Loader"
 
@@ -17,7 +17,7 @@ import { Badge, TextInput, Button } from "flowbite-react"
 export default function Checkin({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { data: session } = useSession();
-  const [event, setEvent] = useState<Event | null>(null);
+  const [event, setEvent] = useState<EventRush | null>(null);
   const [code, setCode] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);

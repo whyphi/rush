@@ -1,26 +1,24 @@
-export interface RushCategory {
-  _id: string,
-  name: string,
-  defaultRushCategory: boolean,
-  dateCreated: string,
-  events: readonly DashboardEvent[],
+export interface RushTimeframe {
+  id: string;
+  name: string;
+  default_rush_timeframe: boolean;
+  date_created: string;
+  events: readonly DashboardEvent[];
 }
 
-export interface Event {
-  _id: string,
-  categoryId: string,
-  name: string,
-  dateCreated: string,
-  numAttendees: number | null,
-  location: string,
-  date: string,
-  deadline: string,
-  eventCoverImage: string,
-  eventCoverImageName: string,
-  lastModified: string,
-  attendeesId: string,
+export interface EventRush {
+  id: string;
+  timeframe_id: string;
+  name: string;
+  date_created: string;
+  last_modified: string;
+  location: string;
+  date: string;
+  deadline: string;
+  event_cover_image: string;
+  event_cover_image_name: string;
 }
 
-export interface DashboardEvent extends Event {
-  checkedIn: boolean,
+export interface DashboardEvent extends EventRush {
+  checked_in: boolean;
 }
