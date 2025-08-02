@@ -26,8 +26,7 @@ export default function Checkin({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/${params.id}`, {
-      method: "POST",
-      body: JSON.stringify({}),
+      method: "GET",
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => {
@@ -55,12 +54,10 @@ export default function Checkin({ params }: { params: { id: string } }) {
       },
       body: JSON.stringify({
         code: code,
-        name: session?.user?.name,
-        email: session?.user?.email,
+        rusheeId: session?.user.rushee_id
       }),
     })
       .then(async (res) => {
-        console.log(res)
         setIsButtonDisabled(false);
         if (!res.ok) {
           const err = await res.json();
