@@ -10,6 +10,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: "https://dummy.supabase.co"
+      SUPABASE_SERVICE_ROLE_KEY: "dummy-service-role-key"
 
     steps:
       - name: Checkout Repository
