@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useSession, signOut } from "next-auth/react";
-import { Event } from "@/types/Events"
+import { EventRush } from "@/types/Events"
 import { useRouter } from 'next/navigation'
 import Loader from "@/components/Loader"
 
@@ -17,7 +17,7 @@ import { Badge, TextInput, Button } from "flowbite-react"
 export default function Checkin({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { data: session } = useSession();
-  const [event, setEvent] = useState<Event | null>(null);
+  const [event, setEvent] = useState<EventRush | null>(null);
   const [code, setCode] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
@@ -26,8 +26,7 @@ export default function Checkin({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/events/rush/${params.id}`, {
-      method: "POST",
-      body: JSON.stringify({}),
+      method: "GET",
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => {
@@ -55,12 +54,10 @@ export default function Checkin({ params }: { params: { id: string } }) {
       },
       body: JSON.stringify({
         code: code,
-        name: session?.user?.name,
-        email: session?.user?.email,
+        rusheeId: session?.user.rushee_id
       }),
     })
       .then(async (res) => {
-        console.log(res)
         setIsButtonDisabled(false);
         if (!res.ok) {
           const err = await res.json();
