@@ -19,9 +19,9 @@ body {
   background-color: #29313e;
 }
 
-/************************** glowing border effect  ***************************/
+/************************** glowing border effect (DEPRECATED: not working anymore?)  ***************************/
 /* source: https://www.youtube.com/watch?v=ezP4kbOvs_E&list=PLZ6KBrFKcaDtqcqHv9NUCpul8a2B3F33F&index=6 */
-.card {
+/* .card {
   position: relative;
 }
 
@@ -39,7 +39,6 @@ body {
   position: absolute;
   height: 101%;
   width: 101%;
-  /* background-image: conic-gradient(from var(--angle), #bb4ec4, #f148c8,#2c12ed, #ffe900, #7fff00, #ffa500, #bb4ec4); */
   background-image: conic-gradient(from var(--angle), #bb4ec4, #f148c8,#2c12ed, #ffa500, #bb4ec4);
   top: 50%;
   left: 50%;
@@ -62,5 +61,5 @@ body {
   to{
     --angle: 360deg;
   }
-}
+} */
 /*****************************************************************************/

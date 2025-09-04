@@ -45,7 +45,11 @@ export default function EventCard({
 
   return (
     <Card
-      className={`${disabled ? "bg-gray-200 dark:bg-gray-600 cursor-not-allowed" : "card cursor-pointer"}`}
+      className={`${
+        disabled
+          ? "bg-gray-200 dark:bg-gray-600 cursor-not-allowed"
+          : "cursor-pointer transform transition duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg hover:shadow-green-200/50 dark:hover:shadow-green-900/30"
+      }`}
       renderImage={() => (
         <div className="relative">
           {loading && <ImagePlaceholder />}
@@ -56,28 +60,34 @@ export default function EventCard({
             onLoad={() => setLoading(false)} // Set loading to false when the image is loaded
             onError={() => setLoading(false)} // Handle error case
           />
-          {disabled && <div className="absolute inset-0 bg-gray-200 opacity-50 rounded-t-lg"></div>}
-      </div>
+          {disabled && (
+            <div className="absolute inset-0 bg-gray-200 opacity-50 rounded-t-lg"></div>
+          )}
+        </div>
       )}
       onClick={handleEventClick}
     >
-        <div className="flex items-center justify-between">
-          <h5 className="flex items-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            <span className={`flex w-2 h-2 me-3 ${isEventPassed ? "bg-red-500" : "bg-green-500"} rounded-full`}></span>
-            {event.name}
-          </h5>
-          {!disabled && <Badge color="success">In-progress</Badge>}
-        </div>
-        <h3 className="text-base font-bold tracking-tight text-gray-900 dark:text-white">
-          <Timestamp date={new Date(event.date)} />
-        </h3>
-        <p className="font-normal text-gray-700 dark:text-gray-400">
-          Location: {event.location}
-        </p>
-        <p className="flex items-center gap-2 font-normal text-gray-700 dark:text-gray-400">
-          Status:
-          {renderStatus()}
-        </p>
+      <div className="flex items-center justify-between">
+        <h5 className="flex items-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <span
+            className={`flex w-2 h-2 me-3 ${
+              isEventPassed ? "bg-red-500" : "bg-green-500"
+            } rounded-full`}
+          ></span>
+          {event.name}
+        </h5>
+        {!disabled && <Badge color="success">In-progress</Badge>}
+      </div>
+      <h3 className="text-base font-bold tracking-tight text-gray-900 dark:text-white">
+        <Timestamp date={new Date(event.date)} />
+      </h3>
+      <p className="font-normal text-gray-700 dark:text-gray-400">
+        Location: {event.location}
+      </p>
+      <p className="flex items-center gap-2 font-normal text-gray-700 dark:text-gray-400">
+        Status:
+        {renderStatus()}
+      </p>
     </Card>
-  )
+  );
 };
